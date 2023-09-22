@@ -15,9 +15,10 @@ import {
 import { AppService } from './app.service';
 import { CreateDto } from 'dto/create.dto';
 
+
 @Controller('/app')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService, ) {}
 
   @Get('get/:id')
   getParams(@Param('id', ParseIntPipe) id: number) {
@@ -27,11 +28,22 @@ export class AppController {
     }
     return id;
   }
- 
-  @UsePipes(new ValidationPipe())
-  @Post('create')
-  create(@Body() dto: CreateDto) { 
+
+  @Post('create1')
+  create1(@Body() dto) {
     console.log(dto);
     return dto;
   }
+
+  @Post('create')
+  create(@Body() dto: CreateDto) {
+    console.log(dto);
+    return dto;
+  }
+  @Get()
+  getAll() {
+    return this.appService.getHello(), this.appService.firstName
+  }
 }
+
+
